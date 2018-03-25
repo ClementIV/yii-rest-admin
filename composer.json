@@ -1,19 +1,42 @@
 {
-    "name": "clement/yii-rest-admin",
-    "description": "test for yii2 rbac",
-    "type": "metapackage",
-    "license": "MIT",
+    "name": "clement/yii-rest-rbac",
+    "description": "RBAC Auth manager for Yii2 ",
+    "keywords": ["yii", "admin", "auth", "rbac"],
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/clement/yii-rest-rbac/issues",
+        "source": "https://github.com/clement/yii-rest-rbac"
+    },
     "authors": [
         {
-            "name": "ClementIV",
-            "email": "fyqnankai@163.com"
+            "name": "Yongqi Feng",
+            "email": "fyqnankai@gmail.com"
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "yiisoft/yii2": "~2.0.7"
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "~2.0"
+    },
+    "suggest": {
+        "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
+    },
     "autoload": {
         "psr-4": {
             "clement\\rest\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-1.0.master": "1.0.x-dev",
+            "dev-master": "2.x-dev"
+        },
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
         }
     }
 }
