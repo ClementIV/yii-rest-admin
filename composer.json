@@ -1,7 +1,15 @@
 {
     "name": "clement/yii-rest-rbac",
-    "description": "test for yii  rbac",
-    "type": "yii-extension",
+    "description": "test for yii",
+    "keywords": ["yii", "admin", "auth", "rbac"],
+    "type": "yii2-extension",
+    "require": {
+        "yiisoft/yii2": "~2.0.7",
+        "clement/yii-rest-rbac": "dev-master"
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "~2.0."
+    },
     "license": "MIT",
     "authors": [
         {
@@ -10,10 +18,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
     "autoload": {
-      "psr-4": {
-          "clement\\rest\\": ""
-      }
-  }
+       "psr-4": {
+           "clement\\rest\\": ""
+       }
+   }
 }
