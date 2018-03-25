@@ -5,8 +5,8 @@
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/clement/yii-rest-rbac/issues",
-        "source": "https://github.com/clement/yii-rest-rbac"
+        "issues": "https://github.com/ClementIV/yii-rest-admin/issues",
+        "source": "https://github.com/ClementIV/yii-rest-admin"
     },
     "authors": [
         {
@@ -27,6 +27,16 @@
     "autoload": {
         "psr-4": {
             "clement\\rest\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-1.0.master": "1.0.x-dev",
+            "dev-master": "2.x-dev"
+        },
+        "asset-installer-paths": {
+           "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
         }
     }
 }
