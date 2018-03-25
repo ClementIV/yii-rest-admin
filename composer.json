@@ -1,13 +1,16 @@
 {
     "name": "clement/yii-rest-rbac",
-    "description": "RBAC Auth manager for Yii2 ",
+    "description": "test for yii",
     "keywords": ["yii", "admin", "auth", "rbac"],
     "type": "yii2-extension",
-    "license": "BSD-3-Clause",
-    "support": {
-        "issues": "https://github.com/clement/yii-rest-rbac/issues",
-        "source": "https://github.com/clement/yii-rest-rbac"
+    "require": {
+        "yiisoft/yii2": "~2.0.7",
+        "clement/yii-rest-rbac": "dev-master"
     },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "~2.0."
+    },
+    "license": "MIT",
     "authors": [
         {
             "name": "Yongqi Feng",
@@ -15,18 +18,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "yiisoft/yii2": "~2.0.7"
-    },
-    "require-dev": {
-        "yiisoft/yii2-codeception": "~2.0"
-    },
-    "suggest": {
-        "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
-    },
     "autoload": {
-        "psr-4": {
-            "clement\\rest\\": ""
-        }
-    }
+       "psr-4": {
+           "clement\\rest\\": ""
+       }
+   }
 }
