@@ -8,7 +8,7 @@
         "clement/yii-rest-rbac": "dev-master"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "~2.0."
+        "yiisoft/yii2-codeception": "~2.0"
     },
     "license": "MIT",
     "authors": [
