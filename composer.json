@@ -1,6 +1,7 @@
 {
     "name": "clement/yii-rest-rbac",
     "description": "test for yii",
+    "keywords": ["yii", "admin", "auth", "rbac"],
     "type": "yii2-extension",
     "require": {
         "yiisoft/yii2": "~2.0.7",
