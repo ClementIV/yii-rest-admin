@@ -1,47 +1,32 @@
-# Windows image file caches
+# sublime project files
+*.sublime-project
+*.sublime-workspace
+
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+/nbproject/private/
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
 Thumbs.db
-ehthumbs.db
 
-# Folder config file
-Desktop.ini
+# composer vendor dir
+/vendor
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# composer itself is not needed
+composer.phar
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
+# Mac DS_Store Files
 .DS_Store
-.AppleDouble
-.LSOverride
 
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
