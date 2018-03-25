@@ -50,7 +50,7 @@ class Module extends \yii\base\Module
      * @var string Main layout using for module. Default to layout of parent module.
      * Its used when `layout` set to 'left-menu', 'right-menu' or 'top-menu'.
      */
-    public $mainLayout = '@mdm/admin/views/layouts/main.php';
+    public $mainLayout = '@clement/rest/views/layouts/main.php';
     /**
      * @var array
      * @see [[menus]]
@@ -95,7 +95,7 @@ class Module extends \yii\base\Module
             Yii::$app->i18n->translations['rbac-admin'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
-                'basePath' => '@mdm/admin/messages',
+                'basePath' => '@clement/rest/messages',
             ];
         }
 

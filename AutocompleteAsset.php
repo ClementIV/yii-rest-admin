@@ -15,7 +15,7 @@ class AutocompleteAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@mdm/admin/assets';
+    public $sourcePath = '@clement/rest/assets';
     /**
      * @inheritdoc
      */
