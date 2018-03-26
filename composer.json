@@ -3,7 +3,7 @@
     "description": "test for yii",
     "keywords": ["yii", "admin", "auth", "rbac"],
     "type": "yii2-extension",
-    "version":"1.0.0",
+    "version":"1.0.0-dev",
     "require": {
         "yiisoft/yii2": "~2.0.7",
         "clement/yii-rest-rbac": "dev-master"
