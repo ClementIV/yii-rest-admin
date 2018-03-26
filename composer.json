@@ -22,5 +22,11 @@
        "psr-4": {
            "clement\\rest\\": ""
        }
-   }
+   },
+   "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+
 }
