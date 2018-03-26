@@ -5,7 +5,7 @@
     "type": "yii2-extension",
     "require": {
         "yiisoft/yii2": "~2.0.7",
-        "clement/yii-rest-rbac": "~v1.0.0"
+        "clement/yii-rest-rbac": "~1.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "~2.0."
