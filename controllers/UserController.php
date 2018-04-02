@@ -51,7 +51,7 @@ class UserController extends Controller
             if (Yii::$app->has('mailer') && ($mailer = Yii::$app->getMailer()) instanceof BaseMailer) {
                 /* @var $mailer BaseMailer */
                 $this->_oldMailPath = $mailer->getViewPath();
-                $mailer->setViewPath('@mdm/admin/mail');
+                $mailer->setViewPath('@clement/rest/mail');
             }
             return true;
         }

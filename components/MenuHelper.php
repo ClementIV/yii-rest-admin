@@ -65,14 +65,14 @@ class MenuHelper
     public static function getAssignedMenu($userId, $root = null, $callback = null, $refresh = false)
     {
         $config = Configs::instance();
-
+        Yii::$app->cache->flush();
         /* @var $manager \yii\rbac\BaseManager */
         $manager = Configs::authManager();
         $menus = Menu::find()->asArray()->indexBy('id')->all();
         $key = [__METHOD__, $userId, $manager->defaultRoles];
         $cache = $config->cache;
-
         if ($refresh || $cache === null || ($assigned = $cache->get($key)) === false) {
+
             $routes = $filter1 = $filter2 = [];
             if ($userId !== null) {
                 foreach ($manager->getPermissionsByUser($userId) as $name => $value) {
@@ -108,34 +108,39 @@ class MenuHelper
                 }
             }
             $assigned = [];
+
             $query = Menu::find()->select(['id'])->asArray();
             if (count($filter2)) {
                 $assigned = $query->where(['route' => $filter2])->column();
             }
+
             if (count($filter1)) {
                 $query->where('route like :filter');
                 foreach ($filter1 as $filter) {
                     $assigned = array_merge($assigned, $query->params([':filter' => $filter])->column());
                 }
             }
+
             $assigned = static::requiredParent($assigned, $menus);
+
             if ($cache !== null) {
                 $cache->set($key, $assigned, $config->cacheDuration, new TagDependency([
                     'tags' => Configs::CACHE_TAG
                 ]));
             }
         }
-
         $key = [__METHOD__, $assigned, $root];
+        $result = $cache->get($key);
         if ($refresh || $callback !== null || $cache === null || (($result = $cache->get($key)) === false)) {
-            $result = static::normalizeMenu($assigned, $menus, $callback, $root);
-            if ($cache !== null && $callback === null) {
-                $cache->set($key, $result, $config->cacheDuration, new TagDependency([
-                    'tags' => Configs::CACHE_TAG
-                ]));
-            }
+             $result = static::normalizeMenu($assigned, $menus, $callback, $root);
+            // if ($cache !== null && $callback === null) {
+            //     $cache->set($key, $result, $config->cacheDuration, new TagDependency([
+            //         'tags' => Configs::CACHE_TAG
+            //     ]));
+            // }
         }
-
+        // var_dump($menus);die();
+        //print_r ($result[0]['url']);die();
         return $result;
     }
 
@@ -196,22 +201,16 @@ class MenuHelper
         $order = [];
         foreach ($assigned as $id) {
             $menu = $menus[$id];
-            if ($menu['parent'] == $parent) {
-                $menu['children'] = static::normalizeMenu($assigned, $menus, $callback, $id);
-                if ($callback !== null) {
-                    $item = call_user_func($callback, $menu);
-                } else {
-                    $item = [
-                        'label' => $menu['name'],
-                        'url' => static::parseRoute($menu['route']),
-                    ];
-                    if ($menu['children'] != []) {
-                        $item['items'] = $menu['children'];
-                    }
-                }
-                $result[] = $item;
-                $order[] = $menu['order'];
-            }
+            $item = [
+                'id'=> $menu['id'],
+                'name' => $menu['name'],
+                'route' => static::parseRoute($menu['route'])[0],
+                'parent_id' => $menu['parent']
+            ];
+
+            $result[] = $item;
+            $order[] = $menu['order'];
+
         }
         if ($result != []) {
             array_multisort($order, $result);

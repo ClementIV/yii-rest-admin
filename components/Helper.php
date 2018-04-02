@@ -96,6 +96,47 @@ class Helper
         return self::$_userRoutes[$userId];
     }
 
+    public static function getPermissionByUser($userId)
+    {
+        if (!isset(self::$_userRoutes[$userId])) {
+            $cache = Configs::cache();
+            if ($cache && ($routes = $cache->get([__METHOD__, $userId])) !== false) {
+                self::$_userRoutes[$userId] = $routes;
+            } else
+            {
+                // $routes = static::getDefaultRoutes();
+                // var_dump($routes);die();
+                $manager = Configs::authManager();
+                $id = 1;
+                $route = [];
+                foreach ($manager->getPermissionsByUser($userId) as $item) {
+                    if ($item->name[0] === '/') {
+                        $methods = explode(",",$item->methods);
+                        foreach($methods as $method){
+                            $route =[
+                                'url' => $item->name,
+                                'methods' => $method,
+                                'id' =>$id++ ,
+                            ];
+                        }
+                    }
+                    if(!empty($route)){
+                        self::$_userRoutes[$userId][] = $route;
+                        $routes[] = $route;
+                    }
+
+
+                }
+                if ($cache) {
+                    $cache->set([__METHOD__, $userId], $routes, Configs::cacheDuration(), new TagDependency([
+                        'tags' => Configs::CACHE_TAG,
+                    ]));
+                }
+            }
+        }
+        return self::$_userRoutes[$userId];
+    }
+
     /**
      * Check access route for user.
      * @param string|array $route
@@ -114,7 +155,6 @@ class Helper
             $user = Yii::$app->getUser();
         }
         $userId = $user instanceof User ? $user->getId() : $user;
-
         if ($config->strict) {
             if ($user->can($r, $params)) {
                 return true;

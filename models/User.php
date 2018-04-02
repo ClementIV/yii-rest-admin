@@ -1,13 +1,13 @@
 <?php
 
-namespace mdm\admin\models;
+namespace clement\rest\models;
 
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use mdm\admin\components\Configs;
+use clement\rest\components\Configs;
 
 /**
  * User model

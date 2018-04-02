@@ -18,7 +18,7 @@ use yii\helpers\VarDumper;
  */
 class Route extends \clement\rest\BaseObject
 {
-    const CACHE_TAG = 'mdm.admin.route';
+    const CACHE_TAG = 'clement.rest.route';
 
     const PREFIX_ADVANCED = '@';
     const PREFIX_BASIC = '/';
@@ -50,6 +50,41 @@ class Route extends \clement\rest\BaseObject
                     }
                     $this->setDefaultRule();
                     $item->ruleName = RouteRule::RULE_NAME;
+                    $manager->add($item);
+                    $manager->addChild($item, $itemAction);
+                } else {
+                    $manager->add($item);
+                }
+
+            } catch (Exception $exc) {
+                Yii::error($exc->getMessage(), __METHOD__);
+            }
+        }
+        Helper::invalidate();
+    }
+    public function addNewMethod($routes,$methods)
+    {
+
+        $manager = Configs::authManager();
+        foreach ($routes as $route) {
+            try {
+                $r = explode('&', $route);
+                $m = $methods;
+                $item = $manager->createPermission($this->getPermissionName($route));
+                $item ->methods = $m;
+                if (count($r) > 1) {
+                    $action = '/' . trim($r[0], '/');
+                    if (($itemAction = $manager->getPermission($action)) === null) {
+                        $itemAction = $manager->createPermission($action);
+                        $manager->add($itemAction);
+                    }
+                    unset($r[0]);
+                    foreach ($r as $part) {
+                        $part = explode('=', $part);
+                        $item->data['params'][$part[0]] = isset($part[1]) ? $part[1] : '';
+                    }
+                    $this->setDefaultRule();
+                    $item ->ruleName = RouteRule::RULE_NAME;
                     $manager->add($item);
                     $manager->addChild($item, $itemAction);
                 } else {

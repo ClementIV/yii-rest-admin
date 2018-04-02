@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace clement\rest\models\searchs;
 
 use Yii;
 use yii\base\Model;
@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 
 /**
  * AssignmentSearch represents the model behind the search form about Assignment.
- * 
+ *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */

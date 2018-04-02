@@ -26,6 +26,8 @@ $animateIcon = ' <i class="glyphicon glyphicon-refresh glyphicon-refresh-animate
         <div class="input-group">
             <input id="inp-route" type="text" class="form-control"
                    placeholder="<?=Yii::t('rbac-admin', 'New route(s)');?>">
+            <input id="inp-method" type="text" class="form-control"
+                          placeholder="<?=Yii::t('rbac-admin', 'methods');?>">
             <span class="input-group-btn">
                 <?=Html::a(Yii::t('rbac-admin', 'Add') . $animateIcon, ['create'], [
     'class' => 'btn btn-success',

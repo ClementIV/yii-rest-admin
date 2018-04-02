@@ -1,16 +1,16 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace clement\rest\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
-use mdm\admin\components\Configs;
+use clement\rest\components\Configs;
 use yii\rbac\Item;
 
 /**
  * AuthItemSearch represents the model behind the search form about AuthItem.
- * 
+ *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
  */

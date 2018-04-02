@@ -1,3 +1,3 @@
 ## Yii2-rest-admin
 ---
-### test developing
+### developing v2.0.0

@@ -36,6 +36,7 @@ class RouteController extends Controller
     public function actionIndex()
     {
         $model = new Route();
+        //print_r($model->getRoutes());die();
         return $this->render('index', ['routes' => $model->getRoutes()]);
     }
 
@@ -49,9 +50,11 @@ class RouteController extends Controller
         Yii::$app->getResponse()->format = 'json';
         $routes = Yii::$app->getRequest()->post('route', '');
         $routes = preg_split('/\s*,\s*/', trim($routes), -1, PREG_SPLIT_NO_EMPTY);
+        $methods = Yii::$app->getRequest()->post('methods', '');
         $model = new Route();
-        $model->addNew($routes);
+        $model->addNewMethod($routes,$methods);
         return $model->getRoutes();
+
     }
 
     /**
@@ -64,6 +67,7 @@ class RouteController extends Controller
         $model = new Route();
         $model->addNew($routes);
         Yii::$app->getResponse()->format = 'json';
+
         return $model->getRoutes();
     }
 
@@ -89,6 +93,7 @@ class RouteController extends Controller
         $model = new Route();
         $model->invalidate();
         Yii::$app->getResponse()->format = 'json';
+
         return $model->getRoutes();
     }
 }

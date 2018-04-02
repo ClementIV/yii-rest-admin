@@ -1,8 +1,8 @@
 <?php
-namespace mdm\admin\models\form;
+namespace clement\rest\models\form;
 
 use Yii;
-use mdm\admin\models\User;
+use clement\rest\models\User;
 use yii\base\Model;
 
 /**
@@ -22,13 +22,13 @@ class Signup extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => 'mdm\admin\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => 'clement\rest\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => 'mdm\admin\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => 'clement\rest\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],

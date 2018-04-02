@@ -1,14 +1,14 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace clement\rest\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use mdm\admin\models\User as UserModel;
+use clement\rest\models\User as UserModel;
 
 /**
- * User represents the model behind the search form about `mdm\admin\models\User`.
+ * User represents the model behind the search form about `clement\rest\models\User`.
  */
 class User extends UserModel
 {

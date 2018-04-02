@@ -1,7 +1,11 @@
 <?php
 
 namespace clement\rest\components;
-
+use yii\base\InvalidParamException;
+use clement\rest\models\Item;
+use yii\db\Query;
+use clement\rest\models\Permission;
+use clement\rest\models\Role;
 /**
  * DbManager represents an authorization manager that stores authorization information in database.
  *
@@ -38,7 +42,111 @@ class DbManager extends \yii\rbac\DbManager
         }
         return $this->_assignments[$userId];
     }
+    /**
+     * @inheritdoc
+     */
+    public function createPermission($name)
+    {
+        $permission = new Permission();
+        $permission->name = $name;
+        return $permission;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function getPermission($name)
+    {
+        $item = $this->getItem($name);
+        return $item instanceof Item && $item->type == Item::TYPE_PERMISSION ? $item : null;
+    }
+    protected function populateItem($row)
+    {
+        $class = $row['type'] == Item::TYPE_PERMISSION ? Permission::className() : Role::className();
 
+        if (!isset($row['data']) || ($data = @unserialize(is_resource($row['data']) ? stream_get_contents($row['data']) : $row['data'])) === false) {
+            $data = null;
+        }
+
+        return new $class([
+            'name' => $row['name'],
+            'type' => $row['type'],
+            'description' => $row['description'],
+            'ruleName' => $row['rule_name'],
+            'data' => $data,
+            'createdAt' => $row['created_at'],
+            'updatedAt' => $row['updated_at'],
+            // 'methods' => $row['methods']
+        ]);
+    }
+    /**
+     * @inheritdoc
+     */
+    protected function getItem($name)
+    {
+        if (empty($name)) {
+            return null;
+        }
+
+        if (!empty($this->items[$name])) {
+            return $this->items[$name];
+        }
+
+        $row = (new Query)->from($this->itemTable)
+            ->where(['name' => $name])
+            ->one($this->db);
+
+        if ($row === false) {
+            return null;
+        }
+
+        return $this->populateItem($row);
+    }
+    /**
+     * @inheritdoc
+     */
+    public function add($object)
+    {
+        if ($object instanceof Item) {
+            if ($object->ruleName && $this->getRule($object->ruleName) === null) {
+                $rule = \Yii::createObject($object->ruleName);
+                $rule->name = $object->ruleName;
+                $this->addRule($rule);
+            }
+            return $this->addItem($object);
+        } elseif ($object instanceof Rule) {
+            return $this->addRule($object);
+        } else {
+            throw new InvalidParamException('Adding unsupported object type.');
+        }
+    }
+    /**
+     * @inheritdoc
+     */
+    protected function addItem($item)
+    {
+        $time = time();
+        if ($item->createdAt === null) {
+            $item->createdAt = $time;
+        }
+        if ($item->updatedAt === null) {
+            $item->updatedAt = $time;
+        }
+        $this->db->createCommand()
+            ->insert($this->itemTable, [
+                'name' => $item->name,
+                'type' => $item->type,
+                'description' => $item->description,
+                'rule_name' => $item->ruleName,
+                'data' => $item->data === null ? null : serialize($item->data),
+                'created_at' => $item->createdAt,
+                'updated_at' => $item->updatedAt,
+                'methods' => $item->methods,
+            ])->execute();
+
+        $this->invalidateCache();
+
+        return true;
+    }
     /**
      * @inheritdoc
      */
@@ -49,4 +157,5 @@ class DbManager extends \yii\rbac\DbManager
         }
         return $this->_childrenList;
     }
+
 }

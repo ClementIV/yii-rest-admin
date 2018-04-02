@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\base\NotSupportedException;
 use yii\filters\VerbFilter;
-use yii\rbac\Item;
+use clement\rest\models\Item;
 
 /**
  * AuthItemController implements the CRUD actions for AuthItem model.
@@ -62,6 +62,7 @@ class ItemController extends Controller
      */
     public function actionView($id)
     {
+
         $model = $this->findModel($id);
 
         return $this->render('view', ['model' => $model]);
@@ -92,6 +93,7 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
         if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         }

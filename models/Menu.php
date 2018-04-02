@@ -1,9 +1,9 @@
 <?php
 
-namespace mdm\admin\models;
+namespace clement\rest\models;
 
 use Yii;
-use mdm\admin\components\Configs;
+use clement\rest\components\Configs;
 use yii\db\Query;
 
 /**
@@ -61,9 +61,6 @@ class Menu extends \yii\db\ActiveRecord
                 return !$this->isNewRecord;
             }],
             [['order'], 'integer'],
-            [['route'], 'in',
-                'range' => static::getSavedRoutes(),
-                'message' => 'Route "{value}" not found.']
         ];
     }
 

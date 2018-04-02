@@ -9,9 +9,13 @@ function updateRoutes(r) {
 $('#btn-new').click(function () {
     var $this = $(this);
     var route = $('#inp-route').val().trim();
+    var methods = $('#inp-method').val().trim();
     if (route != '') {
         $this.children('i.glyphicon-refresh-animate').show();
-        $.post($this.attr('href'), {route: route}, function (r) {
+        $.post($this.attr('href'), {
+            route: route,
+            methods: methods
+        }, function (r) {
             $('#inp-route').val('').focus();
             updateRoutes(r);
         }).always(function () {

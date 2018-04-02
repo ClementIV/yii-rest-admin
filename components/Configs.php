@@ -42,7 +42,7 @@ use yii\rbac\ManagerInterface;
 
 class Configs extends \clement\rest\BaseObject
 {
-    const CACHE_TAG = 'mdm.admin';
+    const CACHE_TAG = 'clement.admin';
 
     /**
      * @var ManagerInterface .

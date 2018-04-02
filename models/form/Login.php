@@ -1,10 +1,10 @@
 <?php
 
-namespace mdm\admin\models\form;
+namespace clement\rest\models\form;
 
 use Yii;
 use yii\base\Model;
-use mdm\admin\models\User;
+use clement\rest\models\User;
 
 /**
  * Login form
@@ -14,7 +14,7 @@ class Login extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-    
+
     private $_user = false;
 
     /**
