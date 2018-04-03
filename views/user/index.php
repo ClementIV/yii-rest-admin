@@ -2,10 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use mdm\admin\components\Helper;
+use clement\rest\components\Helper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel mdm\admin\models\searchs\User */
+/* @var $searchModel clement\rest\models\searchs\User */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('rbac-admin', 'Users');

@@ -115,7 +115,7 @@ class Helper
                         foreach($methods as $method){
                             $route =[
                                 'url' => $item->name,
-                                'methods' => $method,
+                                'method' => $method,
                                 'id' =>$id++ ,
                             ];
                         }
