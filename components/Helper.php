@@ -118,11 +118,11 @@ class Helper
                                 'method' => $method,
                                 'id' =>$id++ ,
                             ];
+                            if(!empty($route)){
+                                self::$_userRoutes[$userId][] = $route;
+                                $routes[] = $route;
+                            }
                         }
-                    }
-                    if(!empty($route)){
-                        self::$_userRoutes[$userId][] = $route;
-                        $routes[] = $route;
                     }
 
 
