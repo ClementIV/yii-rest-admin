@@ -75,7 +75,7 @@ class DbManager extends \yii\rbac\DbManager
             'data' => $data,
             'createdAt' => $row['created_at'],
             'updatedAt' => $row['updated_at'],
-            // 'methods' => $row['methods']
+            'methods' => $row['methods']
         ]);
     }
     /**
