@@ -6,6 +6,7 @@ use clement\rest\models\Item;
 use yii\db\Query;
 use clement\rest\models\Permission;
 use clement\rest\models\Role;
+use yii\db\Expression;
 /**
  * DbManager represents an authorization manager that stores authorization information in database.
  *
@@ -66,7 +67,6 @@ class DbManager extends \yii\rbac\DbManager
         if (!isset($row['data']) || ($data = @unserialize(is_resource($row['data']) ? stream_get_contents($row['data']) : $row['data'])) === false) {
             $data = null;
         }
-
         return new $class([
             'name' => $row['name'],
             'type' => $row['type'],
@@ -75,8 +75,25 @@ class DbManager extends \yii\rbac\DbManager
             'data' => $data,
             'createdAt' => $row['created_at'],
             'updatedAt' => $row['updated_at'],
-            'methods' => $row['methods']
+            'methods' => $row['methods'],
         ]);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getChildren($name)
+    {
+        $query = (new Query())
+            ->select(['name', 'type', 'description', 'rule_name', 'data', 'created_at', 'updated_at','methods'])
+            ->from([$this->itemTable, $this->itemChildTable])
+            ->where(['parent' => $name, 'name' => new Expression('[[child]]')]);
+
+        $children = [];
+        foreach ($query->all($this->db) as $row) {
+            $children[$row['name']] = $this->populateItem($row);
+        }
+
+        return $children;
     }
     /**
      * @inheritdoc

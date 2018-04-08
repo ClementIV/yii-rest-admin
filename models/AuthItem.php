@@ -30,6 +30,7 @@ class AuthItem extends Model
     public $description;
     public $ruleName;
     public $data;
+    public $methods;
     /**
      * @var Item
      */
@@ -49,6 +50,7 @@ class AuthItem extends Model
             $this->description = $item->description;
             $this->ruleName = $item->ruleName;
             $this->data = $item->data === null ? null : Json::encode($item->data);
+            $this->methods = $item->methods;
         }
         parent::__construct($config);
     }
@@ -66,7 +68,7 @@ class AuthItem extends Model
             }],
             [['type'], 'integer'],
             [['description', 'data', 'ruleName'], 'default'],
-            [['name'], 'string', 'max' => 64],
+            [['name','methods'], 'string', 'max' => 64],
         ];
     }
 
