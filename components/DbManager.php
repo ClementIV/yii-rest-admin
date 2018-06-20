@@ -60,6 +60,17 @@ class DbManager extends \yii\rbac\DbManager
         $item = $this->getItem($name);
         return $item instanceof Item && $item->type == Item::TYPE_PERMISSION ? $item : null;
     }
+    public function createRole($name)
+    {
+        $role = new Role();
+        $role->name = $name;
+        return $role;
+    }
+    public function getRole($name)
+    {
+        $item = $this->getItem($name);
+        return $item instanceof Item && $item->type == Item::TYPE_ROLE ? $item : null;
+    }
     protected function populateItem($row)
     {
         $class = $row['type'] == Item::TYPE_PERMISSION ? Permission::className() : Role::className();

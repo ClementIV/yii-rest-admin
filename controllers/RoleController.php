@@ -3,7 +3,7 @@
 namespace clement\rest\controllers;
 
 use clement\rest\components\ItemController;
-use yii\rbac\Item;
+use clement\rest\models\Item;
 
 /**
  * RoleController implements the CRUD actions for AuthItem model.
