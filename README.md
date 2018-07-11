@@ -3,7 +3,7 @@
 ### 写在前面
 本篇只讲述如何使用`Yii-rest-rbac`进行 `restful API`认证和权限管理，关于原理，请移步
 [Yii-REST-RBAC原理]()(目前未完成)
-###下载安装
+### 下载安装
 
 ```
     composer require clement/yii-rest-rbac
